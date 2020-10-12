@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{{ recipe.title }}</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="sticky-top">
+            <!-- NAV BAR -->
+            <nav class="navbar navbar-expand-sm bg-light"> 
+                <ul class="navbar-nav ml-auto"> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/search"> Search </a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/add_recipe"> Add a Recipe </a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/recipe_wall"> Back to Recipes </a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/logout"> Logout </a> 
+                    </li> 
+                </ul> 
+            </nav> 
+        </div>
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-4">{{ recipe.title }}</h1>
+                <p class="lead">Recipe by: {{recipe.recipe_creator.first_name}}</p>
+                <hr>
+                <p>Chef Tip: read all the ingredients and get them in order before you start.</p>
+                <p>Follow the instructions and then eat and enjoy. Come back once your've cleaned your plate and leave a comment!</p>
+                {% if recipe.recipe_creator_id == request.session.id %}
+                <form class="form" action="/delete/{{ recipe.id }}" method='POST' style="float: right; padding-left: 10px">
+                    {% csrf_token %}
+                    <button class = "btn btn-outline-danger" type='submit'>Delete Your Recipe</button>
+                </form>  
+                <a href="/edit/{{ recipe.id }}" style="float: right;"><button class = "btn btn-primary" >Edit Recipe</button></a>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3><b>Recipe Ingredients:</b></h3>
+                    <p>{{ recipe.ingredents}}</p>
+                    <h3><b>Recipe Instructions:</b></h3>
+                     <p> {{ recipe.instructions }}</p>
+                </div>
+                <div class="col-sm-6">
+                    <img src="{{ recipe.image.url }}" class="img-fluid"> 
+                </div>
+            </div>
+            <div class = "row">
+                <div class = "col-12">
+                    <hr>
+                    <form action="/post_comment/{{recipe.id}}" method=POST>
+                        {% csrf_token %}
+                            <h4>Add a comment about {{ recipe.title }}.</h4>
+                            <textarea class="form-control" rows="5" cols="100" name='comment_text' placeholder="This dish was mouthwatering!"> </textarea>
+                            <br>
+                            <br>
+                            <input type="submit" class="btn btn-primary" value='Submit'>
+                    </form>
+                    <br>
+                    <br>
+                    <h4 class="text-secondary">Comments about {{ recipe.title }} </h4>
+                    <br>
+                        {% for comment in recipe.post_comments.all %}
+                            <p>{{comment.comment_user.first_name}}: {{comment.comment_text}}</p>
+                            
+                            {% if comment.comment_user_id == request.session.id %}
+                                <a href="/recipe/{{recipe.id}}/destroy_comment/{{comment.id}}" class="btn btn-outline-danger">Delete Your Comment</a>
+                            {% endif %}
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="page-footer font-small text-muted">
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">
+                <p>© 2020 Copyright</p>
+            </div>  
+        </footer>
+        <!-- JavaScript Infor for Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </body>
+</html>

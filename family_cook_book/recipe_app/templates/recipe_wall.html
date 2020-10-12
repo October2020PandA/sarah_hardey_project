@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Family Recipes</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- NAV BAR -->
+        <div class="sticky-top">
+            <nav class="navbar navbar-expand-sm bg-light"> 
+                <p class="navbar-brand"></p>
+                <ul class="navbar-nav ml-auto"> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/search"> Search </a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/add_recipe"> Add a Recipe </a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/logout"> Logout </a> 
+                    </li> 
+                </ul> 
+            </nav> 
+        </div>
+        <div class="jumbotron">
+            <h1 class="display-4">Our Family Recipes</h1>
+            <p class="lead">Browse images and recipe names for our family's favorite recipes. Click an image that makes your mouth water and learn how to make it!</p>
+            <hr class="my-4">
+            <p>Add your own recipes with images, ingredients, and instructions on how to make your favorite dish, or view a recipe and leave a comment on how much you loved it. Can't find what you're looking for? You can search recipe names.</p>
+        </div>
+        <div class="container"></div>
+            <div class="row">
+                <div class="col-sm-3"> </div>
+                <div class="col-sm-6">       
+                    {% for recipe in recipes %} 
+                        <div class="card" style="width: 100%; margin-bottom: 20px;">
+                            <a href="/recipe/{{ recipe.id }}"><img src="{{ recipe.image.url }}" class="card-img-top" alt="..."></a>
+                            <div class="card-body">
+                            <a href="/recipe/{{ recipe.id }}"><h5 class="card-title" style="text-align: center;">{{ recipe.title }}</h5></a>
+                            <!-- <a href="/recipe/{{ recipe.id }}" class="btn btn-primary" style="justify-content: center;" >View Recipe</a> -->
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-3"> </div>
+            </div> 
+            <!-- Footer -->
+            <footer class="page-footer font-small text-muted">
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">
+                    <p>© 2020 Copyright</p>
+                </div>  
+            </footer>              
+        </div>
+         <!-- JavaScript Infor for Bootstrap -->
+         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Search</title>
+        {% load static %}
+        
+
+        <link rel="shortcut icon" href="">
+
+        <!-- Bootstrap CDN -->
+
+        <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+        <script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			  crossorigin="anonymous"></script>
+        
+        <!-- FontAwesome CDN -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        
+        <link href="{% static "main.css" %}"
+        rel="stylesheet"
+        media="screen">
+    </head>
+    <body>
+            <!-- NAV BAR -->
+            <nav class="navbar navbar-expand-sm bg-light"> 
+                
+                <ul class="navbar-nav ml-auto"> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/recipe_wall"> Back to Recipes </a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/add_recipe"> Add a Recipe </a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/logout"> Logout </a> 
+                    </li> 
+                </ul> 
+            </nav> 
+            <div class="jumbotron">
+                <h1 class="display-4">Search for Recipes</h1>
+                <hr class="my-4">
+                <p>You can search for your favorite looking for the recipe's name. Begin typing the name of the recipe and it will appear like magic!</p>
+                <p>If the recipe you are looking for does not exist, please add it!</p>
+              </div>
+            
+        <div class="container">
+        {% block content %}	
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+            
+                <form class="form-inline">
+                <i id="search-icon" class="fas fa-search" aria-hidden="true"></i>
+                <input id="user-input" class="form-control" type="text" placeholder="Chicken wings..." aria-label="Search">
+                <small id="emailHelp" class="form-text text-muted">Type the name of the recipe you are looking for.</small>
+                </form>
+            
+        <!-- mess with margin/padding -->
+        <div class="row" style="margin-top:10px;">
+            <div id="replaceable-content" class="">
+                {% include 'search_results.html' %}
+            </div>
+        </div>
+        {% endblock %}
+        {% block footer %}
+        <script type="text/javascript" src="{% static "javascript/main.js" %}"></script>
+      {% endblock %}
+      <div class="col-sm-4"></div>
+    </div>
+    </body>
+</html>

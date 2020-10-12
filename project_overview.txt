@@ -1,0 +1,49 @@
+
+
+PROJECT NAME
+Digital Family Recipe Cook Book
+
+
+PROJECT DESCRIPTION
+Online database that a user (family members) can upload and search for recipies. 
+Once a user is logged in they can search for a recipe, create and edit their own recipes, and add comments on recipes.
+Recipe "cards" will include title of the recipe, image of the cooked dish, ingredent list, and instructions. 
+
+
+FEATURE LEVELS
+PO: core functionality
+- Login/register
+- Add/edit recipes
+
+P1: required features
+- Upload images 
+- Search (for recipes) [AJAX]
+
+P2: nice to have features
+- AJAX adding and deleting comments
+- Ability to edit an image
+- Adding recipe discription that could be used on the recipe cards on recipe_wall.html
+- Present recipes on recipe_wall.html is rows (not on long list)
+ 
+
+FEATURE LIST
+- User authentication (register/login).
+    - User database.
+- [CRUD] User can create, read, update, and delete recipes. 
+    - Recipe database.
+- [AJAX] Recipes are searchable via key words/search terms.
+- Uploading of image (jpg/png) files. 
+    > install Pillow
+- Users can comment on recipes.  
+- [Bootstrap] Make is look pretty and professional. 
+
+
+RESOURCES
+Starting point for research...
+- File Uploads - https://docs.djangoproject.com/en/3.1/topics/http/file-uploads/
+- AJAX search function - https://stackoverflow.com/questions/37688730/django-ajax-search-function
+- Search - https://docs.djangoproject.com/en/1.10/topics/db/search/
+
+
+GITHUP REPO
+https://github.com/October2020PandA/sarah_project
